@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\WebAPI\\WebAPI.csproj": {}
+    "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Application\\Application.csproj": {
+    "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Application\\Application.csproj",
+        "projectPath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\cosmi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Application\\obj\\",
+        "outputPath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Domain\\Domain.csproj"
+              "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Domain\\Domain.csproj"
               }
             }
           }
@@ -55,6 +55,14 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.0, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.5.1, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.5.1, )"
             }
           },
           "imports": [
@@ -77,14 +85,14 @@
         }
       }
     },
-    "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Domain\\Domain.csproj": {
+    "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\cosmi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -136,14 +144,14 @@
         }
       }
     },
-    "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\cosmi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -164,8 +172,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Application\\Application.csproj"
+              "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Application\\Application.csproj"
               }
             }
           }
@@ -215,14 +223,14 @@
         }
       }
     },
-    "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\WebAPI\\WebAPI.csproj": {
+    "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\WebAPI\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\WebAPI\\WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\WebAPI\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\WebAPI\\WebAPI.csproj",
+        "projectPath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\WebAPI\\WebAPI.csproj",
         "packagesPath": "C:\\Users\\cosmi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\WebAPI\\obj\\",
+        "outputPath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -243,11 +251,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Application\\Application.csproj"
+              "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Application\\Application.csproj"
               },
-              "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\cosmi\\OneDrive\\Desktop\\PhysiQuest\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -290,7 +298,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.4.0, )"
+              "version": "[6.5.0, )"
             }
           },
           "imports": [

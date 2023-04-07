@@ -24,10 +24,10 @@ namespace Infrastructure.Configuration
                 .IsRequired();
 
             builder.Property(u => u.Points)
-                .IsRequired();
+                .HasDefaultValue(0);
 
             builder.Property(u => u.Tokens)
-                .IsRequired();
+                .HasDefaultValue(100);
 
             builder.HasMany(u => u.UserQuests)
                 .WithOne(uq => uq.User)

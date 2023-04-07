@@ -23,6 +23,26 @@ namespace Application.Profiles
             CreateMap<UserQuest, UserQuestDTO>().ReverseMap();
             CreateMap<Badge, BadgeDTO>().ReverseMap();
             CreateMap<Quest, QuestDTO>().ReverseMap();
+            CreateMap<Quest, CreateAndUpdateQuestDTO>().ReverseMap();
+            CreateMap<User, UserWithBadgesDTO>().IncludeBase<User, UserDTO>().ReverseMap();
+            CreateMap<User, UserWithQuestsDTO>().IncludeBase<User, UserDTO>().ReverseMap();
+
+            CreateMap<CreateAndUpdateDTO, User>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.Points, opt => opt.Ignore())
+                .ForMember(dest => dest.Tokens, opt => opt.Ignore());
+            CreateMap<User, CreateAndUpdateDTO>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email));
+
+            //CreateMap<CreateAndUpdateQuestDTO, Quest>()
+            //    .ForMember(dest => dest.Id, opt => opt.Ignore())
+            //    .ForMember(dest => dest.PropNameToIgnore, opt => opt.Ignore());
+            //CreateMap<Quest, CreateAndUpdateQuestDTO>()
+            //    .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
+            //    .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+
+
         }
     }
 }

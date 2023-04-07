@@ -14,6 +14,7 @@ namespace Application.Common.Interfaces
         Task<Quest> CreateQuestAsync(Quest quest);
         Task<Quest> UpdateQuestAsync(Quest quest);
         Task<bool> DeleteQuestAsync(int id);
+        Task<Quest> GetQuestByTitleAsync(string name);
     }
 
 }

@@ -54,6 +54,13 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<Badge> GetBadgeByNameAsync(string name)
+        {
+            return await _context.Badges
+                .FirstOrDefaultAsync(b => string.Equals(b.Name, name, StringComparison.OrdinalIgnoreCase));
+        }
     }
+
 
 }

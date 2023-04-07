@@ -23,9 +23,11 @@ namespace Infrastructure.Configuration
                 .HasMaxLength(500);
 
             builder.Property(q => q.RewardPoints)
+                .HasDefaultValue(50)
                 .IsRequired();
 
             builder.Property(q => q.RewardTokens)
+                .HasDefaultValue(25)
                 .IsRequired();
 
             builder.HasMany(q => q.UserQuests)

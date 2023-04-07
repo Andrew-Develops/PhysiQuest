@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
+
     public class QuestRepository : IQuestRepository
     {
         private readonly ApplicationDbContext _context;
@@ -54,6 +55,13 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<Quest> GetQuestByTitleAsync(string title)
+        {
+            return await _context.Quests
+                .FirstOrDefaultAsync(q => string.Equals(q.Title, title, StringComparison.OrdinalIgnoreCase));
+        }
+
     }
 
 }

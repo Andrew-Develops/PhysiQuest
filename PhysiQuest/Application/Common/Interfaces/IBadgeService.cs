@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.Badges.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace Application.Common.Interfaces
 {
-    internal interface IBadgeService
+    public interface IBadgeService
     {
+        Task<IEnumerable<BadgeDTO>> GetAllBadgesAsync();
+        Task<BadgeDTO> GetBadgeByIdAsync(int id);
+        Task<BadgeDTO> CreateBadgeAsync(CreateAndUpdateBadgeDTO badgeDto);
+        Task<BadgeDTO> UpdateBadgeAsync(int id, CreateAndUpdateBadgeDTO badgeDto);
+        Task<bool> DeleteBadgeAsync(int id);
     }
 }
