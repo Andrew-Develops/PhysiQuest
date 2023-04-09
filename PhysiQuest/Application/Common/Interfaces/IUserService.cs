@@ -3,6 +3,7 @@ using Application.Quests.DTO;
 using Application.UserBadges.DTO;
 using Application.UserQuests.DTO;
 using Application.Users.DTO;
+using Domain.Entities;
 
 namespace Application.Common.Interfaces
 {
@@ -18,5 +19,7 @@ namespace Application.Common.Interfaces
         Task<IEnumerable<BadgeDTO>> GetUserBadgesByNameAsync(string userName);
         Task<UserQuestDTO> AssignQuestToUserAsync(string username, int questId);
         Task<QuestDTO> CreateUserQuestAsync(string username, CreateAndUpdateQuestDTO questDto);
+        Task<string> GetProofImageUrlAsync(string username, int questId);
+        Task<UserQuestDTO> DeleteProofImageUrlAsync(string username, int questId);
     }
 }

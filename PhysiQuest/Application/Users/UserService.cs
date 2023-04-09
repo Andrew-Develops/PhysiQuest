@@ -292,5 +292,31 @@ namespace Application.Users
             await _unitOfWork.SaveChangesAsync();
             return _mapper.Map<QuestDTO>(quest);
         }
+
+        public async Task<string> GetProofImageUrlAsync(string username, int questId)
+        {
+            var proofImageUrl = await _unitOfWork.UserQuestRepository.GetProofImageUrlAsync(username, questId);
+
+            if (proofImageUrl == null)
+            {
+                throw new UserQuestNotFoundException($"Proof image URL for user {username} and quest id {questId} not found.");
+            }
+
+            return proofImageUrl;
+        }
+
+        public async Task<UserQuestDTO> DeleteProofImageUrlAsync(string username, int questId)
+        {
+            var userQuest = await _unitOfWork.UserQuestRepository.DeleteProofImageUrlAsync(username, questId);
+
+            if (userQuest == null)
+            {
+                throw new UserQuestNotFoundException($"User quest with user name {username} and quest id {questId} not found.");
+            }
+
+            return _mapper.Map<UserQuestDTO>(userQuest);
+        }
+
+
     }
 }

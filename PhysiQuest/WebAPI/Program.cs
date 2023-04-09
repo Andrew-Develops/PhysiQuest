@@ -5,6 +5,7 @@ using Application.Quests;
 using Application.Users;
 using Infrastructure;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -65,12 +66,8 @@ namespace WebAPI
             app.UseCors();
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }

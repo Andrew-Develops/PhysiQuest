@@ -1,8 +1,8 @@
 ﻿using Application.Badges.DTO;
 using Application.Common.Exceptions;
 using Application.Common.Interfaces;
-using Application.Quests.DTO;
 using Application.UserBadges.DTO;
+using Application.UserQuests.DTO;
 using Application.Users.DTO;
 using Microsoft.AspNetCore.Mvc;
 
@@ -175,25 +175,49 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPost("create-user-quest")]
-        public async Task<ActionResult<QuestDTO>> CreateUserQuestAsync([FromQuery] string username, [FromBody] CreateAndUpdateQuestDTO questDto)
+        [HttpGet("user/{username}/user-quest/{questId}/proof-image-url")]
+        public async Task<ActionResult<string>> GetProofImageUrlAsync(string username, int questId)
         {
             try
             {
-                var userQuest = await _userService.CreateUserQuestAsync(username, questDto);
-                return Ok(userQuest);
+                var proofImageUrl = await _userService.GetProofImageUrlAsync(username, questId);
+
+                if (string.IsNullOrEmpty(proofImageUrl))
+                {
+                    return NotFound("Proof image URL not found.");
+                }
+
+                return Ok(proofImageUrl);
+            }
+            catch (UserQuestNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("user/{username}/user-quest/{questId}/delete-proof-image-url")]
+        public async Task<ActionResult<UserQuestDTO>> DeleteProofImageUrlAsync(string username, int questId)
+        {
+            try
+            {
+                var deletedProofUserQuestDto = await _userService.DeleteProofImageUrlAsync(username, questId);
+                return Ok(deletedProofUserQuestDto);
             }
             catch (UserNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch (InsufficientTokensException ex)
+            catch (UserQuestNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (ArgumentException ex)
             {
                 return BadRequest(ex.Message);
-            }
-            catch (DuplicateQuestException ex)
-            {
-                return Conflict(ex.Message);
             }
             catch (Exception ex)
             {

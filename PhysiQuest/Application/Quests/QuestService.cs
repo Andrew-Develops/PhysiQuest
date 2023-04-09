@@ -135,13 +135,13 @@ namespace Application.Quests
         /// <param name="username">The username of the user.</param>
         /// <param name="questId">The ID of the quest.</param>
         /// <returns>The completed user quest DTO, or null if the user quest was not found.</returns>
-        public async Task<UserQuestDTO> CompleteUserQuestAsync(string username, int questId)
+        public async Task<UserQuestDTO> CompleteUserQuestAsync(string username, int questId, string imageUrl)
         {
-            var userQuest = await _unitOfWork.UserQuestRepository.CompleteUserQuestAsync(username, questId);
+            var userQuest = await _unitOfWork.UserQuestRepository.CompleteUserQuestAsync(username, questId, imageUrl);
 
             if (userQuest == null)
             {
-                return null;
+                throw new UserQuestNotFoundException($"User quest with user name {username} and quest id {questId} not found.");
             }
 
             return _mapper.Map<UserQuestDTO>(userQuest);

@@ -26,7 +26,7 @@ namespace Infrastructure.Configuration
                 .IsRequired();
 
             builder.Property(x => x.ProofImage)
-                .HasColumnType("varbinary(max)");
+                .HasColumnType("nvarchar(max)");
         }
     }
 

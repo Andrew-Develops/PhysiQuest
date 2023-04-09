@@ -143,14 +143,14 @@ namespace WebAPI.Controllers
         /// <param name="username">The username.</param>
         /// <returns>Returns an ActionResult with the completed UserQuestDTO.</returns>
         [HttpPut("complete/{questId}")]
-        public async Task<ActionResult<UserQuestDTO>> CompleteUserQuestAsync(int questId, [FromQuery] string username)
+        public async Task<ActionResult<UserQuestDTO>> CompleteUserQuestAsync(int questId, [FromQuery] string username, [FromForm] string imageUrl)
         {
             if (string.IsNullOrEmpty(username))
             {
                 return BadRequest("Username is required");
             }
 
-            var completedUserQuest = await _questService.CompleteUserQuestAsync(username, questId);
+            var completedUserQuest = await _questService.CompleteUserQuestAsync(username, questId, imageUrl);
 
             if (completedUserQuest == null)
             {
@@ -233,6 +233,9 @@ namespace WebAPI.Controllers
             var quests = await _questService.GetQuestsByRewardTokensAsync();
             return Ok(quests);
         }
+
+
+
 
     }
 

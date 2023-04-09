@@ -10,7 +10,7 @@ namespace Application.Common.Interfaces
         Task<QuestDTO> CreateQuestAsync(CreateAndUpdateQuestDTO questDto);
         Task<QuestDTO> UpdateQuestAsync(int id, CreateAndUpdateQuestDTO questDto);
         Task<bool> DeleteQuestAsync(int id);
-        Task<UserQuestDTO> CompleteUserQuestAsync(string username, int questId);
+        Task<UserQuestDTO> CompleteUserQuestAsync(string username, int questId, string imageUrl);
         Task<IEnumerable<UserQuestDetailDTO>> GetUserQuestsAsync(string username);
         Task<UserQuestDTO> DeleteUserQuestAsync(string username, int questId);
         Task<IEnumerable<QuestDTO>> GetQuestsAlphabeticalAsync();

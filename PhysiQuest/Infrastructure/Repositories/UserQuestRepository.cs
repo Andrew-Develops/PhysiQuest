@@ -81,7 +81,7 @@ namespace Infrastructure.Repositories
         /// <param name="username">The name of the user who completed the quest.</param>
         /// <param name="questId">The ID of the completed quest.</param>
         /// <returns>An asynchronous task that returns the completed UserQuest object, or null if the user or quest is not found.</returns>
-        public async Task<UserQuest> CompleteUserQuestAsync(string username, int questId)
+        public async Task<UserQuest> CompleteUserQuestAsync(string username, int questId, string imageUrl)
         {
             var user = await _context.Users.Include(u => u.UserBadges).ThenInclude(ub => ub.Badge).FirstOrDefaultAsync(u => u.Name == username);
 
@@ -97,6 +97,7 @@ namespace Infrastructure.Repositories
                 userQuest.Status = "Completed";
                 user.Points += userQuest.Quest.RewardPoints;
                 user.Tokens += userQuest.Quest.RewardTokens;
+                userQuest.ProofImage = imageUrl;
 
                 // Count the number of completed quests
                 int completedQuests = _context.UserQuest.Count(uq => uq.UserId == user.Id && uq.Status == "Completed");
@@ -194,5 +195,51 @@ namespace Infrastructure.Repositories
 
             return userQuest;
         }
+
+        public async Task<UserQuest> GetUserQuestByUserIdAndQuestIdAsync(int userId, int questId)
+        {
+            return await _context.UserQuest.FirstOrDefaultAsync(uq => uq.UserId == userId && uq.QuestId == questId);
+        }
+
+
+        public async Task<string> GetProofImageUrlAsync(string username, int questId)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Name == username);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var userQuest = await _context.UserQuest.FirstOrDefaultAsync(uq => uq.UserId == user.Id && uq.QuestId == questId);
+
+            if (userQuest != null && userQuest.Status == "Completed")
+            {
+                return userQuest.ProofImage;
+            }
+
+            return null;
+        }
+
+        public async Task<UserQuest> DeleteProofImageUrlAsync(string username, int questId)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Name == username);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var userQuest = await _context.UserQuest.FirstOrDefaultAsync(uq => uq.UserId == user.Id && uq.QuestId == questId);
+
+            if (userQuest != null && userQuest.Status == "Completed")
+            {
+                userQuest.ProofImage = null;
+                await _context.SaveChangesAsync();
+            }
+
+            return userQuest;
+        }
+
     }
 }
