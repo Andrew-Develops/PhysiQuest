@@ -3,11 +3,6 @@ using Application.Common.Exceptions;
 using Application.Common.Interfaces;
 using AutoMapper;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Badges
 {
@@ -43,19 +38,30 @@ namespace Application.Badges
             var badge = await _unitOfWork.BadgeRepository.GetBadgeByIdAsync(id);
             if (badge == null)
             {
-                throw new BadgeNotFoundException(id);
+                throw new BadgeNotFoundException($"Badge with ID {id} was not found.");
             }
             return _mapper.Map<BadgeDTO>(badge);
         }
 
         /// <summary>
-        /// Creates a new badge.
+        /// Creates a new badge with the given name and description.
         /// </summary>
-        /// <param name="badgeDto">A CreateAndUpdateBadgeDTO representing the badge to be created.</param>
-        /// <returns>A BadgeDTO representing the newly created badge.</returns>
+        /// <param name="badgeDto">The DTO containing the badge details to be created.</param>
+        /// <returns>The newly created badge as a <see cref="BadgeDTO"/> object.</returns>
+        /// <exception cref="ArgumentException">Thrown when either the badge name or description is null or whitespace.</exception>
         /// <exception cref="DuplicateBadgeException">Thrown when a badge with the same name already exists.</exception>
         public async Task<BadgeDTO> CreateBadgeAsync(CreateAndUpdateBadgeDTO badgeDto)
         {
+            if (string.IsNullOrWhiteSpace(badgeDto.Name))
+            {
+                throw new ArgumentException("Badge name cannot be empty.");
+            }
+
+            if (string.IsNullOrWhiteSpace(badgeDto.Description))
+            {
+                throw new ArgumentException("Badge description cannot be empty.");
+            }
+
             var existingBadge = await _unitOfWork.BadgeRepository.GetBadgeByNameAsync(badgeDto.Name);
             if (existingBadge != null)
             {
@@ -82,7 +88,7 @@ namespace Application.Badges
 
             if (badge == null)
             {
-                throw new BadgeNotFoundException(id);
+                throw new BadgeNotFoundException($"Badge with ID {id} was not found.");
             }
 
             var existingBadge = await _unitOfWork.BadgeRepository.GetBadgeByNameAsync(badgeDto.Name);
@@ -110,24 +116,29 @@ namespace Application.Badges
             var badge = await _unitOfWork.BadgeRepository.GetBadgeByIdAsync(id);
             if (badge == null)
             {
-                throw new BadgeNotFoundException(id);
+                throw new BadgeNotFoundException($"Badge with ID {id} was not found.");
             }
 
             var result = await _unitOfWork.BadgeRepository.DeleteBadgeAsync(id);
             if (!result)
             {
-                throw new BadgeDeletionFailedException(id);
+                throw new BadgeDeletionFailedException($"Failed to delete badge with ID {id}.");
+
             }
 
             await _unitOfWork.SaveChangesAsync();
             return true;
         }
 
+        /// <summary>
+        /// Deletes the UserBadge associated with the specified username and badgeId from the database.
+        /// </summary>
+        /// <param name="username">The username of the user whose badge is being deleted.</param>
+        /// <param name="badgeId">The ID of the badge being deleted.</param>
+        /// <returns>Returns a Task representing the asynchronous operation. The result of the task is the deleted UserBadge object.</returns>
         public async Task<UserBadge> DeleteUserBadgeAsync(string username, int badgeId)
         {
             return await _unitOfWork.UserBadgeRepository.DeleteUserBadgeAsync(username, badgeId);
         }
-
     }
-
 }

@@ -1,9 +1,4 @@
 ﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Common.Interfaces
 {
@@ -16,7 +11,5 @@ namespace Application.Common.Interfaces
         Task<bool> DeleteUserBadgeAsync(int userId, int badgeId);
         Task<IEnumerable<UserBadge>> GetUserBadgesByUserIdAsync(int userId);
         Task<UserBadge> DeleteUserBadgeAsync(string username, int badgeId);
-
     }
-
 }

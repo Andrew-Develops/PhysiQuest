@@ -5,12 +5,6 @@ using Application.UserQuests.DTO;
 using Application.Users.DTO;
 using AutoMapper;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Application.Profiles
 {

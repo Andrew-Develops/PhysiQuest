@@ -16,6 +16,10 @@ namespace WebAPI.Controllers
             _badgeService = badgeService;
         }
 
+        /// <summary>
+        /// Returns all badges.
+        /// </summary>
+        /// <returns>A list of BadgeDTOs</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BadgeDTO>>> GetAllBadgesAsync()
         {
@@ -23,6 +27,11 @@ namespace WebAPI.Controllers
             return Ok(badges);
         }
 
+        /// <summary>
+        /// Returns a badge with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the badge to retrieve.</param>
+        /// <returns>The BadgeDTO with the specified ID.</returns>
         [HttpGet("{id}", Name = "GetBadgeById")]
         public async Task<ActionResult<BadgeDTO>> GetBadgeByIdAsync(int id)
         {
@@ -37,6 +46,11 @@ namespace WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Creates a new badge.
+        /// </summary>
+        /// <param name="badgeDto">The data to create the badge from.</param>
+        /// <returns>The created BadgeDTO.</returns>
         [HttpPost]
         public async Task<ActionResult<BadgeDTO>> CreateBadgeAsync([FromBody] CreateAndUpdateBadgeDTO badgeDto)
         {
@@ -44,6 +58,12 @@ namespace WebAPI.Controllers
             return CreatedAtRoute("GetBadgeById", new { id = newBadge.Id }, newBadge);
         }
 
+        /// <summary>
+        /// Updates an existing badge.
+        /// </summary>
+        /// <param name="id">The ID of the badge to update.</param>
+        /// <param name="badgeDto">The new data for the badge.</param>
+        /// <returns>An ActionResult indicating success or failure.</returns>
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateBadgeAsync(int id, [FromBody] CreateAndUpdateBadgeDTO badgeDto)
         {
@@ -62,6 +82,11 @@ namespace WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletes a badge with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the badge to delete.</param>
+        /// <returns>An ActionResult indicating success or failure.</returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteBadgeAsync(int id)
         {
@@ -80,6 +105,12 @@ namespace WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletes a user's badge with the specified ID.
+        /// </summary>
+        /// <param name="username">The username of the user whose badge is to be deleted.</param>
+        /// <param name="badgeId">The ID of the badge to delete.</param>
+        /// <returns>An IActionResult indicating success or failure.</returns>
         [HttpDelete("user/{badgeId}")]
         public async Task<IActionResult> DeleteUserBadgeAsync(string username, int badgeId)
         {
@@ -97,7 +128,5 @@ namespace WebAPI.Controllers
 
             return Ok(deletedUserBadge);
         }
-
     }
-
 }

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.Common.Exceptions
+﻿namespace Application.Common.Exceptions
 {
     public class DuplicateBadgeException : Exception
     {
         public DuplicateBadgeException(string message) : base(message)
+        {
+        }
+        public DuplicateBadgeException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

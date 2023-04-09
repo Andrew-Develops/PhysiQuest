@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.Common.Exceptions
+﻿namespace Application.Common.Exceptions
 {
     public class QuestNotFoundException : Exception
     {
         public QuestNotFoundException(int questId)
             : base($"Quest with ID {questId} was not found.")
+        {
+        }
+        public QuestNotFoundException(string message) : base(message)
+        {
+        }
+
+        public QuestNotFoundException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

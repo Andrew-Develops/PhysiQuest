@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.Common.Exceptions
+﻿namespace Application.Common.Exceptions
 {
     public class UserBadgeNotFoundException : Exception
     {
         public UserBadgeNotFoundException(int userBadgeId)
             : base($"User badge with ID {userBadgeId} was not found.")
+        {
+        }
+        public UserBadgeNotFoundException(string message) : base(message)
+        {
+        }
+
+        public UserBadgeNotFoundException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

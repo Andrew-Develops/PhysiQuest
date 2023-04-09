@@ -1,12 +1,8 @@
 ﻿using Application.Badges.DTO;
+using Application.Quests.DTO;
 using Application.UserBadges.DTO;
 using Application.UserQuests.DTO;
 using Application.Users.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Common.Interfaces
 {
@@ -21,6 +17,6 @@ namespace Application.Common.Interfaces
         Task<UserBadgeDTO> AddBadgeToUserAsync(AssignBadgeDTO assignBadgeDto);
         Task<IEnumerable<BadgeDTO>> GetUserBadgesByNameAsync(string userName);
         Task<UserQuestDTO> AssignQuestToUserAsync(string username, int questId);
-
+        Task<QuestDTO> CreateUserQuestAsync(string username, CreateAndUpdateQuestDTO questDto);
     }
 }

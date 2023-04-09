@@ -1,11 +1,5 @@
 ﻿using Application.Quests.DTO;
 using Application.UserQuests.DTO;
-using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Common.Interfaces
 {
@@ -22,7 +16,5 @@ namespace Application.Common.Interfaces
         Task<IEnumerable<QuestDTO>> GetQuestsAlphabeticalAsync();
         Task<IEnumerable<QuestDTO>> GetQuestsByRewardPointsAsync();
         Task<IEnumerable<QuestDTO>> GetQuestsByRewardTokensAsync();
-
-
     }
 }

@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.Common.Exceptions
+﻿namespace Application.Common.Exceptions
 {
     public class UserQuestNotFoundException : Exception
     {
-        public UserQuestNotFoundException(int userQuestId)
-            : base($"User quest with ID {userQuestId} was not found.")
+        public UserQuestNotFoundException(int userQuestId) : base($"User quest with id {userQuestId} was not found.")
+        {
+        }
+
+        public UserQuestNotFoundException(string message) : base(message)
+        {
+        }
+
+        public UserQuestNotFoundException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }
+
 }

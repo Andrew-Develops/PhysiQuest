@@ -1,18 +1,13 @@
 ﻿using Application.Badges.DTO;
 using Application.Common.Exceptions;
 using Application.Common.Interfaces;
-using Application.Common.Validator;
+using Application.Quests.DTO;
 using Application.UserBadges.DTO;
 using Application.UserQuests.DTO;
 using Application.Users.DTO;
 using AutoMapper;
 using Domain.Entities;
-using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 
 namespace Application.Users
 {
@@ -54,17 +49,36 @@ namespace Application.Users
         }
 
         /// <summary>
-        /// Creates a new user.
+        /// Creates a new user based on the information provided in the <paramref name="userDto"/> parameter.
         /// </summary>
-        /// <param name="userDto">The user DTO containing the user's information.</param>
-        /// <returns>The newly created user.</returns>
-        /// <exception cref="DuplicateEmailException">Thrown if a user with the same email already exists.</exception>
+        /// <param name="userDto">The data transfer object that contains the information needed to create the user.</param>
+        /// <returns>The newly created user as a <see cref="UserDTO"/>.</returns>
+        /// <exception cref="ArgumentException">Thrown when either the email or username is null or empty.</exception>
+        /// <exception cref="DuplicateEmailException">Thrown when a user with the same email address already exists in the system.</exception>
+        /// <exception cref="DuplicateNameException">Thrown when a user with the same username already exists in the system.</exception>
         public async Task<UserDTO> CreateUserAsync(CreateAndUpdateDTO userDto)
         {
+
+            if (string.IsNullOrEmpty(userDto.Email))
+            {
+                throw new ArgumentException("Email is required.", nameof(userDto.Email));
+            }
+
+            if (string.IsNullOrEmpty(userDto.Name))
+            {
+                throw new ArgumentException("Username is required.", nameof(userDto.Name));
+            }
+
             var userWithEmail = await _unitOfWork.UserRepository.GetUserByEmailAsync(userDto.Email);
             if (userWithEmail != null)
             {
                 throw new DuplicateEmailException($"User with email {userDto.Email} already exists.");
+            }
+
+            var userWithName = await _unitOfWork.UserRepository.GetUserByNameAsync(userDto.Name);
+            if (userWithName != null)
+            {
+                throw new DuplicateNameException($"User with name {userDto.Name} already exists.");
             }
 
             var user = _mapper.Map<User>(userDto);
@@ -115,7 +129,7 @@ namespace Application.Users
             var user = await _unitOfWork.UserRepository.GetUserByIdAsync(id);
             if (user == null)
             {
-                throw new UserNotFoundException(id);
+                throw new UserNotFoundException($"User with ID {id} not found.");
             }
 
             var result = await _unitOfWork.UserRepository.DeleteUserAsync(id);
@@ -138,6 +152,14 @@ namespace Application.Users
             return _mapper.Map<IEnumerable<UserDTO>>(users);
         }
 
+        /// <summary>
+        /// Assigns a badge to a user.
+        /// </summary>
+        /// <param name="assignBadgeDto">The DTO containing the user and badge IDs.</param>
+        /// <returns>Returns a Task representing the asynchronous operation. The result of the task is the DTO representation of the newly assigned UserBadge.</returns>
+        /// <exception cref="UserNotFoundException">Thrown when the specified user ID is not found in the database.</exception>
+        /// <exception cref="BadgeNotFoundException">Thrown when the specified badge ID is not found in the database.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when the specified user already has the specified badge assigned to them.</exception>
         public async Task<UserBadgeDTO> AddBadgeToUserAsync(AssignBadgeDTO assignBadgeDto)
         {
             var user = await _unitOfWork.UserRepository.GetUserByIdAsync(assignBadgeDto.UserId);
@@ -171,13 +193,18 @@ namespace Application.Users
             return _mapper.Map<UserBadgeDTO>(userBadge);
         }
 
-
+        /// <summary>
+        /// Gets all badges assigned to a user by their username.
+        /// </summary>
+        /// <param name="userName">The username of the user.</param>
+        /// <returns>Returns a Task representing the asynchronous operation. The result of the task is an IEnumerable of BadgeDTO representing the badges assigned to the user.</returns>
+        /// <exception cref="UserNameNotFoundException">Thrown when the specified username is not found in the database.</exception>
         public async Task<IEnumerable<BadgeDTO>> GetUserBadgesByNameAsync(string userName)
         {
             var user = await _unitOfWork.UserRepository.GetUserByNameAsync(userName);
             if (user == null)
             {
-                throw new UserNameNotFoundException(userName);
+                throw new UserNameNotFoundException($"The user with username '{userName}' was not found.");
             }
 
             var userBadges = await _unitOfWork.UserBadgeRepository.GetUserBadgesByUserIdAsync(user.Id);
@@ -187,7 +214,14 @@ namespace Application.Users
             return _mapper.Map<IEnumerable<BadgeDTO>>(badges);
         }
 
-        // UserService.cs
+        /// <summary>
+        /// Assigns a quest to a user.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <param name="questId">The ID of the quest being assigned.</param>
+        /// <returns>Returns a Task representing the asynchronous operation. The result of the task is the DTO representation of the newly assigned UserQuest.</returns>
+        /// <exception cref="UserNotFoundException">Thrown when the specified username is not found in the database.</exception>
+        /// <exception cref="QuestNotFoundException">Thrown when the specified quest ID is not found in the database.</exception>
         public async Task<UserQuestDTO> AssignQuestToUserAsync(string username, int questId)
         {
             var user = await _unitOfWork.UserRepository.GetUserByNameAsync(username);
@@ -199,7 +233,7 @@ namespace Application.Users
             var quest = await _unitOfWork.QuestRepository.GetQuestByIdAsync(questId);
             if (quest == null)
             {
-                throw new QuestNotFoundException(questId);
+                throw new QuestNotFoundException($"The quest with ID {questId} could not be found.");
             }
 
             var userQuest = new UserQuest
@@ -217,5 +251,46 @@ namespace Application.Users
             return _mapper.Map<UserQuestDTO>(userQuest);
         }
 
+        /// <summary>
+        /// Creates a new quest for the specified user.
+        /// </summary>
+        /// <param name="username">The username of the user for whom the quest is created.</param>
+        /// <param name="questDto">The quest data.</param>
+        /// <returns>The created quest.</returns>
+        /// <exception cref="UserNotFoundException">Thrown when the user with the specified username is not found.</exception>
+        /// <exception cref="InsufficientTokensException">Thrown when the user does not have enough tokens to create a quest.</exception>
+        /// <exception cref="DuplicateQuestException">Thrown when a quest with the same title already exists.</exception>
+        public async Task<QuestDTO> CreateUserQuestAsync(string username, CreateAndUpdateQuestDTO questDto)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByNameAsync(username);
+            if (user == null)
+            {
+                throw new UserNotFoundException($"User with name {username} not found.");
+            }
+
+            if (user.Tokens < 20)
+            {
+                throw new InsufficientTokensException("User does not have enough tokens to create a quest.");
+            }
+
+            var existingQuest = await _unitOfWork.QuestRepository.GetQuestByTitleAsync(questDto.Title);
+            if (existingQuest != null)
+            {
+                throw new DuplicateQuestException($"Quest with title {questDto.Title} already exists.");
+            }
+
+            // Set maximum allowed RewardPoints and RewardTokens
+            questDto.RewardPoints = Math.Min(questDto.RewardPoints, 100);
+            questDto.RewardTokens = Math.Min(questDto.RewardTokens, 15);
+
+            var quest = _mapper.Map<Quest>(questDto);
+            await _unitOfWork.QuestRepository.CreateQuestAsync(quest);
+
+            // Deduct 20 tokens from the user's balance
+            user.Tokens -= 20;
+
+            await _unitOfWork.SaveChangesAsync();
+            return _mapper.Map<QuestDTO>(quest);
+        }
     }
 }
