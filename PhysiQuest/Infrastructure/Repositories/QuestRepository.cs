@@ -59,8 +59,43 @@ namespace Infrastructure.Repositories
         public async Task<Quest> GetQuestByTitleAsync(string title)
         {
             return await _context.Quests
-                .FirstOrDefaultAsync(q => string.Equals(q.Title, title, StringComparison.OrdinalIgnoreCase));
+                .Where(q => EF.Functions.Like(q.Title, title))
+                .FirstOrDefaultAsync();
         }
+
+        public async Task<UserQuest> CompleteUserQuestAsync(string username, int questId)
+        {
+            var userQuest = await _context.UserQuest
+                .Include(uq => uq.User)
+                .Include(uq => uq.Quest)
+                .FirstOrDefaultAsync(uq => uq.User.Name == username && uq.QuestId == questId);
+
+            if (userQuest == null)
+            {
+                return null;
+            }
+
+            userQuest.Status = "Completed";
+            await _context.SaveChangesAsync();
+
+            return userQuest;
+        }
+        public async Task<List<Quest>> GetQuestsAlphabeticalAsync()
+        {
+            return await _context.Quests.OrderBy(q => q.Title).ToListAsync();
+        }
+
+        public async Task<List<Quest>> GetQuestsByRewardPointsAsync()
+        {
+            return await _context.Quests.OrderByDescending(q => q.RewardPoints).ToListAsync();
+        }
+
+        public async Task<List<Quest>> GetQuestsByRewardTokensAsync()
+        {
+            return await _context.Quests.OrderByDescending(q => q.RewardTokens).ToListAsync();
+        }
+
+
 
     }
 

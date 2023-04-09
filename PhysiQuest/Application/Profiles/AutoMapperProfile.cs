@@ -19,7 +19,7 @@ namespace Application.Profiles
         public AutoMapperProfile()
         {
             CreateMap<User, UserDTO>().ReverseMap();
-            CreateMap<UserBadge, UserBadgeDTO>().ReverseMap();
+            //CreateMap<UserBadge, UserBadgeDTO>().ReverseMap();
             CreateMap<UserQuest, UserQuestDTO>().ReverseMap();
             CreateMap<Badge, BadgeDTO>().ReverseMap();
             CreateMap<Quest, QuestDTO>().ReverseMap();
@@ -35,14 +35,12 @@ namespace Application.Profiles
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email));
 
-            //CreateMap<CreateAndUpdateQuestDTO, Quest>()
-            //    .ForMember(dest => dest.Id, opt => opt.Ignore())
-            //    .ForMember(dest => dest.PropNameToIgnore, opt => opt.Ignore());
-            //CreateMap<Quest, CreateAndUpdateQuestDTO>()
-            //    .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
-            //    .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+            CreateMap<UserBadge, UserBadgeDTO>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name))
+                .ForMember(dest => dest.BadgeName, opt => opt.MapFrom(src => src.Badge.Name));
 
-
+            CreateMap<CreateAndUpdateBadgeDTO, Badge>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
         }
     }
 }

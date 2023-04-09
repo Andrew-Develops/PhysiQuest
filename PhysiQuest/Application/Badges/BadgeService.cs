@@ -122,6 +122,12 @@ namespace Application.Badges
             await _unitOfWork.SaveChangesAsync();
             return true;
         }
+
+        public async Task<UserBadge> DeleteUserBadgeAsync(string username, int badgeId)
+        {
+            return await _unitOfWork.UserBadgeRepository.DeleteUserBadgeAsync(username, badgeId);
+        }
+
     }
 
 }

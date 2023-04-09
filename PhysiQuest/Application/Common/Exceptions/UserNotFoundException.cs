@@ -12,5 +12,9 @@ namespace Application.Common.Exceptions
             : base($"User with ID {userId} not found.")
         {
         }
+
+        public UserNotFoundException(string message) : base(message)
+        {
+        }
     }
 }

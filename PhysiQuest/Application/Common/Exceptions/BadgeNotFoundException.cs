@@ -12,5 +12,9 @@ namespace Application.Common.Exceptions
             : base($"Badge with ID {badgeId} was not found.")
         {
         }
+
+        public BadgeNotFoundException(string message) : base(message)
+        {
+        }
     }
 }

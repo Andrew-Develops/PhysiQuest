@@ -64,6 +64,15 @@ namespace Infrastructure.Repositories
         {
             return await _context.Users.OrderByDescending(u => u.Points).ToListAsync();
         }
+
+        public async Task<User> GetUserByNameAsync(string userName)
+        {
+            return await _context.Users
+                .Include(u => u.UserBadges)
+                .Include(u => u.UserQuests)
+                .FirstOrDefaultAsync(u => u.Name == userName);
+        }
+
     }
 
 }

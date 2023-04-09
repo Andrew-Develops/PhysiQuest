@@ -16,6 +16,7 @@ namespace Application.Common.Interfaces
         Task<bool> DeleteUserAsync(int id);
         Task<User> GetUserByEmailAsync(string email);
         Task<IEnumerable<User>> GetUsersByPointsDescendingAsync();
+        Task<User> GetUserByNameAsync(string userName);
     }
 
 }

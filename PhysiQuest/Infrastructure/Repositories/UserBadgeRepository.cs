@@ -54,6 +54,34 @@ namespace Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<IEnumerable<UserBadge>> GetUserBadgesByUserIdAsync(int userId)
+        {
+            return await _context.UserBadges
+                .Where(ub => ub.UserId == userId)
+                .ToListAsync();
+        }
+
+        public async Task<UserBadge> DeleteUserBadgeAsync(string username, int badgeId)
+        {
+            var user = await _context.Users.Include(u => u.UserBadges).FirstOrDefaultAsync(u => u.Name == username);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var userBadge = user.UserBadges.FirstOrDefault(ub => ub.BadgeId == badgeId);
+
+            if (userBadge != null)
+            {
+                _context.UserBadges.Remove(userBadge);
+                await _context.SaveChangesAsync();
+            }
+
+            return userBadge;
+        }
+
     }
 
 }

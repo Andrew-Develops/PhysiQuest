@@ -57,9 +57,16 @@ namespace Infrastructure.Repositories
 
         public async Task<Badge> GetBadgeByNameAsync(string name)
         {
-            return await _context.Badges
-                .FirstOrDefaultAsync(b => string.Equals(b.Name, name, StringComparison.OrdinalIgnoreCase));
+            return await _context.Badges.FirstOrDefaultAsync(b => b.Name.ToLower() == name.ToLower());
         }
+        public async Task<IEnumerable<Badge>> GetBadgesByIdsAsync(IEnumerable<int> badgeIds)
+        {
+            return await _context.Badges
+                .Where(b => badgeIds.Contains(b.Id))
+                .ToListAsync();
+        }
+
+
     }
 
 

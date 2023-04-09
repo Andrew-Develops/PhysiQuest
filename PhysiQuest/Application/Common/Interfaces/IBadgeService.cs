@@ -1,4 +1,5 @@
 ﻿using Application.Badges.DTO;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,8 @@ namespace Application.Common.Interfaces
         Task<BadgeDTO> CreateBadgeAsync(CreateAndUpdateBadgeDTO badgeDto);
         Task<BadgeDTO> UpdateBadgeAsync(int id, CreateAndUpdateBadgeDTO badgeDto);
         Task<bool> DeleteBadgeAsync(int id);
+        Task<UserBadge> DeleteUserBadgeAsync(string username, int badgeId);
+
+
     }
 }

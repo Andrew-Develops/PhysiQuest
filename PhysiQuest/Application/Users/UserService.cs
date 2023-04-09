@@ -1,6 +1,9 @@
-﻿using Application.Common.Exceptions;
+﻿using Application.Badges.DTO;
+using Application.Common.Exceptions;
 using Application.Common.Interfaces;
 using Application.Common.Validator;
+using Application.UserBadges.DTO;
+using Application.UserQuests.DTO;
 using Application.Users.DTO;
 using AutoMapper;
 using Domain.Entities;
@@ -134,5 +137,85 @@ namespace Application.Users
             var users = await _unitOfWork.UserRepository.GetUsersByPointsDescendingAsync();
             return _mapper.Map<IEnumerable<UserDTO>>(users);
         }
+
+        public async Task<UserBadgeDTO> AddBadgeToUserAsync(AssignBadgeDTO assignBadgeDto)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByIdAsync(assignBadgeDto.UserId);
+            if (user == null)
+            {
+                throw new UserNotFoundException($"User with ID {assignBadgeDto.UserId} not found.");
+            }
+
+            var badge = await _unitOfWork.BadgeRepository.GetBadgeByIdAsync(assignBadgeDto.BadgeId);
+            if (badge == null)
+            {
+                throw new BadgeNotFoundException($"Badge with ID {assignBadgeDto.BadgeId} not found.");
+            }
+
+            var userBadge = await _unitOfWork.UserBadgeRepository.GetUserBadgeByIdAsync(assignBadgeDto.UserId, assignBadgeDto.BadgeId);
+            if (userBadge != null)
+            {
+                throw new InvalidOperationException($"User with ID {assignBadgeDto.UserId} already has the badge with ID {assignBadgeDto.BadgeId}.");
+            }
+
+            userBadge = new UserBadge
+            {
+                UserId = assignBadgeDto.UserId,
+                BadgeId = assignBadgeDto.BadgeId,
+                AwardDate = DateTime.UtcNow
+            };
+
+            await _unitOfWork.UserBadgeRepository.CreateUserBadgeAsync(userBadge);
+            await _unitOfWork.SaveChangesAsync();
+
+            return _mapper.Map<UserBadgeDTO>(userBadge);
+        }
+
+
+        public async Task<IEnumerable<BadgeDTO>> GetUserBadgesByNameAsync(string userName)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByNameAsync(userName);
+            if (user == null)
+            {
+                throw new UserNameNotFoundException(userName);
+            }
+
+            var userBadges = await _unitOfWork.UserBadgeRepository.GetUserBadgesByUserIdAsync(user.Id);
+            var badgeIds = userBadges.Select(ub => ub.BadgeId);
+            var badges = await _unitOfWork.BadgeRepository.GetBadgesByIdsAsync(badgeIds);
+
+            return _mapper.Map<IEnumerable<BadgeDTO>>(badges);
+        }
+
+        // UserService.cs
+        public async Task<UserQuestDTO> AssignQuestToUserAsync(string username, int questId)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByNameAsync(username);
+            if (user == null)
+            {
+                throw new UserNotFoundException(username);
+            }
+
+            var quest = await _unitOfWork.QuestRepository.GetQuestByIdAsync(questId);
+            if (quest == null)
+            {
+                throw new QuestNotFoundException(questId);
+            }
+
+            var userQuest = new UserQuest
+            {
+                UserId = user.Id,
+                User = user,
+                QuestId = quest.Id,
+                Quest = quest,
+                Status = "Assigned"
+            };
+
+            await _unitOfWork.UserQuestRepository.CreateUserQuestAsync(userQuest);
+            await _unitOfWork.SaveChangesAsync();
+
+            return _mapper.Map<UserQuestDTO>(userQuest);
+        }
+
     }
 }

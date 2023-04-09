@@ -15,6 +15,8 @@ namespace Application.Common.Interfaces
         Task<Badge> UpdateBadgeAsync(Badge badge);
         Task<bool> DeleteBadgeAsync(int id);
         Task<Badge> GetBadgeByNameAsync(string name);
+        Task<IEnumerable<Badge>> GetBadgesByIdsAsync(IEnumerable<int> badgeIds);
+
     }
 
 }

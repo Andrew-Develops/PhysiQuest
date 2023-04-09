@@ -1,6 +1,8 @@
 ﻿using Application.Common.Exceptions;
 using Application.Common.Interfaces;
 using Application.Quests.DTO;
+using Application.UserQuests.DTO;
+using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -10,10 +12,12 @@ namespace WebAPI.Controllers
     public class QuestController : ControllerBase
     {
         private readonly IQuestService _questService;
+        private readonly IUserService _userService;
 
-        public QuestController(IQuestService questService)
+        public QuestController(IQuestService questService, IUserService userService)
         {
             _questService = questService;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -79,6 +83,99 @@ namespace WebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost("assign/{username}/{questId}")]
+        public async Task<ActionResult<UserQuestDTO>> AssignQuestToUserAsync(string username, int questId)
+        {
+            try
+            {
+                var userQuest = await _userService.AssignQuestToUserAsync(username, questId);
+                return Ok(userQuest);
+            }
+            catch (UserNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (QuestNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpPut("complete/{questId}")]
+        public async Task<ActionResult<UserQuestDTO>> CompleteUserQuestAsync(int questId, [FromQuery] string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return BadRequest("Username is required");
+            }
+
+            var completedUserQuest = await _questService.CompleteUserQuestAsync(username, questId);
+
+            if (completedUserQuest == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(completedUserQuest);
+        }
+
+        [HttpGet("user")]
+        public async Task<ActionResult<IEnumerable<UserQuestDetailDTO>>> GetUserQuestsAsync([FromQuery] string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return BadRequest("Username is required");
+            }
+
+            var userQuests = await _questService.GetUserQuestsAsync(username);
+            return Ok(userQuests);
+        }
+
+        [HttpDelete("delete/{questId}")]
+        public async Task<ActionResult<UserQuestDTO>> DeleteUserQuestAsync(int questId, [FromQuery] string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return BadRequest("Username is required");
+            }
+
+            var deletedUserQuest = await _questService.DeleteUserQuestAsync(username, questId);
+
+            if (deletedUserQuest == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(deletedUserQuest);
+        }
+
+        [HttpGet("alphabetical")]
+        public async Task<ActionResult<IEnumerable<QuestDTO>>> GetQuestsAlphabeticalAsync()
+        {
+            var quests = await _questService.GetQuestsAlphabeticalAsync();
+            return Ok(quests);
+        }
+
+        [HttpGet("reward-points")]
+        public async Task<ActionResult<IEnumerable<QuestDTO>>> GetQuestsByRewardPointsAsync()
+        {
+            var quests = await _questService.GetQuestsByRewardPointsAsync();
+            return Ok(quests);
+        }
+
+        [HttpGet("reward-tokens")]
+        public async Task<ActionResult<IEnumerable<QuestDTO>>> GetQuestsByRewardTokensAsync()
+        {
+            var quests = await _questService.GetQuestsByRewardTokensAsync();
+            return Ok(quests);
+        }
+
     }
 
 }

@@ -15,6 +15,11 @@ namespace Application.Common.Interfaces
         Task<Quest> UpdateQuestAsync(Quest quest);
         Task<bool> DeleteQuestAsync(int id);
         Task<Quest> GetQuestByTitleAsync(string name);
+        Task<List<Quest>> GetQuestsAlphabeticalAsync();
+        Task<List<Quest>> GetQuestsByRewardPointsAsync();
+        Task<List<Quest>> GetQuestsByRewardTokensAsync();
+
+
     }
 
 }

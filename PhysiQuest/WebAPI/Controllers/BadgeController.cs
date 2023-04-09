@@ -79,6 +79,25 @@ namespace WebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete("user/{badgeId}")]
+        public async Task<IActionResult> DeleteUserBadgeAsync(string username, int badgeId)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return BadRequest("Username is required");
+            }
+
+            var deletedUserBadge = await _badgeService.DeleteUserBadgeAsync(username, badgeId);
+
+            if (deletedUserBadge == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(deletedUserBadge);
+        }
+
     }
 
 }

@@ -1,5 +1,7 @@
-﻿using Application.Common.Exceptions;
+﻿using Application.Badges.DTO;
+using Application.Common.Exceptions;
 using Application.Common.Interfaces;
+using Application.UserBadges.DTO;
 using Application.Users.DTO;
 using Microsoft.AspNetCore.Mvc;
 
@@ -97,5 +99,40 @@ namespace WebAPI.Controllers
             var users = await _userService.GetUsersByPointsDescendingAsync();
             return Ok(users);
         }
+
+        [HttpPost("{userId}/badges")]
+        public async Task<ActionResult<UserBadgeDTO>> AddBadgeToUserAsync(int userId, [FromBody] AssignBadgeDTO assignBadgeDto)
+        {
+            assignBadgeDto.UserId = userId;
+
+            try
+            {
+                var userBadge = await _userService.AddBadgeToUserAsync(assignBadgeDto);
+                return Ok(userBadge);
+            }
+            catch (UserNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (BadgeNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet("{userName}/badges")]
+        public async Task<ActionResult<IEnumerable<BadgeDTO>>> GetUserBadgesByNameAsync(string userName)
+        {
+            try
+            {
+                var badges = await _userService.GetUserBadgesByNameAsync(userName);
+                return Ok(badges);
+            }
+            catch (UserNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
     }
 }

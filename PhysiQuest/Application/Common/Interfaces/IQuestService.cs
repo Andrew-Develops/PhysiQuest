@@ -1,4 +1,6 @@
 ﻿using Application.Quests.DTO;
+using Application.UserQuests.DTO;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +16,13 @@ namespace Application.Common.Interfaces
         Task<QuestDTO> CreateQuestAsync(CreateAndUpdateQuestDTO questDto);
         Task<QuestDTO> UpdateQuestAsync(int id, CreateAndUpdateQuestDTO questDto);
         Task<bool> DeleteQuestAsync(int id);
+        Task<UserQuestDTO> CompleteUserQuestAsync(string username, int questId);
+        Task<IEnumerable<UserQuestDetailDTO>> GetUserQuestsAsync(string username);
+        Task<UserQuestDTO> DeleteUserQuestAsync(string username, int questId);
+        Task<IEnumerable<QuestDTO>> GetQuestsAlphabeticalAsync();
+        Task<IEnumerable<QuestDTO>> GetQuestsByRewardPointsAsync();
+        Task<IEnumerable<QuestDTO>> GetQuestsByRewardTokensAsync();
+
+
     }
 }

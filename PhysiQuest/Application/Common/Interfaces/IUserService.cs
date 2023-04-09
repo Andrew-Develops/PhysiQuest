@@ -1,4 +1,7 @@
-﻿using Application.Users.DTO;
+﻿using Application.Badges.DTO;
+using Application.UserBadges.DTO;
+using Application.UserQuests.DTO;
+using Application.Users.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +18,9 @@ namespace Application.Common.Interfaces
         Task<UserDTO> UpdateUserAsync(int id, CreateAndUpdateDTO userDto);
         Task<bool> DeleteUserAsync(int id);
         Task<IEnumerable<UserDTO>> GetUsersByPointsDescendingAsync();
+        Task<UserBadgeDTO> AddBadgeToUserAsync(AssignBadgeDTO assignBadgeDto);
+        Task<IEnumerable<BadgeDTO>> GetUserBadgesByNameAsync(string userName);
+        Task<UserQuestDTO> AssignQuestToUserAsync(string username, int questId);
+
     }
 }
