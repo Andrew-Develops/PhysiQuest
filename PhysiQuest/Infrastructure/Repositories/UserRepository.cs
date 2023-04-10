@@ -106,6 +106,16 @@ namespace Infrastructure.Repositories
                 .FirstOrDefaultAsync(u => u.Name == userName);
         }
 
+        /// <summary>
+        /// Retrieves a user from the database using the specified username.
+        /// </summary>
+        /// <param name="userName">The username of the user to retrieve.</param>
+        /// <returns>A User object representing the retrieved user, or null if the user is not found.</returns>
+        public async Task<User> GetUserByUserNameAsync(string userName)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Name == userName);
+        }
+
     }
 
 }

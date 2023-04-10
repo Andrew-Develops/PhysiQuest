@@ -52,6 +52,30 @@ namespace WebAPI.Controllers
         }
 
         /// <summary>
+        /// Retrieves a user from the database using the specified username.
+        /// </summary>
+        /// <param name="userName">The username of the user to retrieve.</param>
+        /// <returns>An ActionResult object containing a UserDTO object representing the retrieved user.</returns>
+        [HttpGet("user-by-username/{userName}")]
+        public async Task<ActionResult<UserDTO>> GetUserByUserNameAsync(string userName)
+        {
+            try
+            {
+                var user = await _userService.GetUserByUserNameAsync(userName);
+                return Ok(user);
+            }
+            catch (UserNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        /// <summary>
         /// Creates a new user.
         /// </summary>
         /// <param name="userDto">The data for the new user.</param>
@@ -177,7 +201,12 @@ namespace WebAPI.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Creates a new user quest for the specified user.
+        /// </summary>
+        /// <param name="username">The username of the user for whom the quest is being created.</param>
+        /// <param name="questDto">A CreateAndUpdateQuestDTO object containing the details of the quest to be created.</param>
+        /// <returns>An ActionResult object containing a QuestDTO object representing the created quest.</returns>
         [HttpPost("create-quest/{username}")]
         public async Task<ActionResult<QuestDTO>> CreateUserQuestAsync(string username, [FromBody] CreateAndUpdateQuestDTO questDto)
         {

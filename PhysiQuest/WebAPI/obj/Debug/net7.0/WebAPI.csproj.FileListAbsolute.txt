@@ -103,7 +103,6 @@ C:\Users\Public\Documents\PhysiQuest\PhysiQuest\WebAPI\bin\Debug\net7.0\AutoMapp
 C:\Users\Public\Documents\PhysiQuest\PhysiQuest\WebAPI\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Public\Documents\PhysiQuest\PhysiQuest\WebAPI\bin\Debug\net7.0\Azure.Core.dll
 C:\Users\Public\Documents\PhysiQuest\PhysiQuest\WebAPI\bin\Debug\net7.0\Azure.Identity.dll
-C:\Users\Public\Documents\PhysiQuest\PhysiQuest\WebAPI\bin\Debug\net7.0\FluentValidation.dll
 C:\Users\Public\Documents\PhysiQuest\PhysiQuest\WebAPI\bin\Debug\net7.0\Humanizer.dll
 C:\Users\Public\Documents\PhysiQuest\PhysiQuest\WebAPI\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\Public\Documents\PhysiQuest\PhysiQuest\WebAPI\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
@@ -167,4 +166,3 @@ C:\Users\Public\Documents\PhysiQuest\PhysiQuest\WebAPI\obj\Debug\net7.0\scopedcs
 C:\Users\Public\Documents\PhysiQuest\PhysiQuest\WebAPI\obj\Debug\net7.0\WebAPI.csproj.CopyComplete
 C:\Users\Public\Documents\PhysiQuest\PhysiQuest\WebAPI\obj\Debug\net7.0\WebAPI.genruntimeconfig.cache
 C:\Users\Public\Documents\PhysiQuest\PhysiQuest\WebAPI\obj\Debug\net7.0\ref\WebAPI.dll
-C:\Users\Public\Documents\PhysiQuest\PhysiQuest\WebAPI\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CTNfuH5NLzdZP6I/mMgn7NO0ngBesA6pdLdFU9D2ajRwhDQUfzKrdFQkoYXBHwNq/T8MHZaG+4SFqDzPHLX7Bg==",
+  "dgSpecHash": "u3FcxdrEPfrIMAPvYpmKRQhYa9TU6St9S8jOoJ4k3Cie8l9grWCVQD0gO9xtGn5oWDBhJl3FmqkcYo3b3YRibw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
@@ -8,8 +8,6 @@
     "C:\\Users\\cosmi\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
-    "C:\\Users\\cosmi\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
-    "C:\\Users\\cosmi\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.4\\microsoft.aspnetcore.openapi.7.0.4.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",

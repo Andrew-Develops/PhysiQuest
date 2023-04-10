@@ -1,13 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "M692rcDz6fMRD0mONaBI0fiauf2FaFmZrr2nxbiHMO86+oiSSyHPKxFoNDob6rqTd15T/oBiG6Its4xZZDSExA==",
+  "dgSpecHash": "kBBxkJsdXaanDbCAMdrZArkN4pWfkAHAa5zHXAumvt8jfO6DyCAYykVPYH6Z2ePMHrOSGe7RwrLGXRmYu9X6yg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cosmi\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
-    "C:\\Users\\cosmi\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
-    "C:\\Users\\cosmi\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",

@@ -119,6 +119,24 @@ namespace Infrastructure.Repositories
                     await AssignBadgeAsync(user, 3);
                 }
 
+                // Assign badges based on the user's points
+                if (user.Points >= 15000)
+                {
+                    await AssignBadgeAsync(user, 8);
+                }
+                else if (user.Points >= 5000)
+                {
+                    await AssignBadgeAsync(user, 7);
+                }
+                else if (user.Points >= 1000)
+                {
+                    await AssignBadgeAsync(user, 6);
+                }
+                else if (user.Points >= 500)
+                {
+                    await AssignBadgeAsync(user, 5);
+                }
+
                 await _context.SaveChangesAsync();
             }
 

@@ -152,11 +152,32 @@ namespace Application.Quests
         /// </summary>
         /// <param name="username">The username of the user.</param>
         /// <returns>The list of user quest detail DTOs.</returns>
-        public async Task<IEnumerable<UserQuestDetailDTO>> GetUserQuestsAsync(string username)
+        //public async Task<IEnumerable<UserQuestDetailDTO>> GetUserQuestsAsync(string username)
+        //{
+        //    var userQuests = await _unitOfWork.UserQuestRepository.GetUserQuestsAsync(username);
+        //    return userQuests.Select(uq => new UserQuestDetailDTO
+        //    {
+        //        Title = uq.Quest.Title,
+        //        Description = uq.Quest.Description,
+        //        RewardPoints = uq.Quest.RewardPoints,
+        //        RewardTokens = uq.Quest.RewardTokens,
+        //        Status = uq.Status
+        //    }).ToList();
+        //}
+
+
+
+        /// <summary>
+        /// Retrieves a collection of user quest details associated with a specified username.
+        /// </summary>
+        /// <param name="username">The username of the user to retrieve quest details for.</param>
+        /// <returns>The list of user quest detail DTOs.</returns>
+        public async Task<IEnumerable<UserQuestDetailWithIdDTO>> GetUserQuestsAsync(string username)
         {
             var userQuests = await _unitOfWork.UserQuestRepository.GetUserQuestsAsync(username);
-            return userQuests.Select(uq => new UserQuestDetailDTO
+            return userQuests.Select(uq => new UserQuestDetailWithIdDTO
             {
+                Id = uq.Quest.Id,
                 Title = uq.Quest.Title,
                 Description = uq.Quest.Description,
                 RewardPoints = uq.Quest.RewardPoints,
@@ -164,6 +185,7 @@ namespace Application.Quests
                 Status = uq.Status
             }).ToList();
         }
+
 
         /// <summary>
         /// Deletes a user quest for the specified user and quest ID.

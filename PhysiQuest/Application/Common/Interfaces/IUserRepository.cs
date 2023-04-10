@@ -12,6 +12,7 @@ namespace Application.Common.Interfaces
         Task<User> GetUserByEmailAsync(string email);
         Task<IEnumerable<User>> GetUsersByPointsDescendingAsync();
         Task<User> GetUserByNameAsync(string userName);
+        Task<User> GetUserByUserNameAsync(string userName);
     }
 
 }

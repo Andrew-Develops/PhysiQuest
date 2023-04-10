@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3dziiuK41wfGzVu8+fTe8CkqObtqVjOm6Ybe7i0KMAOoE05/fYNgqLtCmktpSmdHd2vF5Hxi0NnuBNHKVfPnjQ==",
+  "dgSpecHash": "0H2Z3lVO7r3swkIb6Ox48hr56aBbhl/UL/h4pJ/hd5css5Ou5iV9tqJRa5yk1BvgkLW88XOtP7pxLs51bRcGWg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Public\\Documents\\PhysiQuest\\PhysiQuest\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -8,8 +8,6 @@
     "C:\\Users\\cosmi\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
-    "C:\\Users\\cosmi\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
-    "C:\\Users\\cosmi\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

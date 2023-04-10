@@ -49,6 +49,22 @@ namespace Application.Users
         }
 
         /// <summary>
+        /// Retrieves a user from the database using the specified username.
+        /// </summary>
+        /// <param name="userName">The username of the user to retrieve.</param>
+        /// <returns>A UserDTO object representing the retrieved user.</returns>
+        /// <exception cref="UserNotFoundException">Thrown if the user is not found.</exception>
+        public async Task<UserDTO> GetUserByUserNameAsync(string userName)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(userName);
+            if (user == null)
+            {
+                throw new UserNotFoundException($"User with username '{userName}' not found.");
+            }
+            return _mapper.Map<UserDTO>(user);
+        }
+
+        /// <summary>
         /// Creates a new user based on the information provided in the <paramref name="userDto"/> parameter.
         /// </summary>
         /// <param name="userDto">The data transfer object that contains the information needed to create the user.</param>

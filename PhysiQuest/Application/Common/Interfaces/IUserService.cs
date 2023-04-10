@@ -21,5 +21,6 @@ namespace Application.Common.Interfaces
         Task<QuestDTO> CreateUserQuestAsync(string username, CreateAndUpdateQuestDTO questDto);
         Task<string> GetProofImageUrlAsync(string username, int questId);
         Task<UserQuestDTO> DeleteProofImageUrlAsync(string username, int questId);
+        Task<UserDTO> GetUserByUserNameAsync(string userName);
     }
 }
