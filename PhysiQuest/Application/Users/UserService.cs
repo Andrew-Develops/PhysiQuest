@@ -281,7 +281,7 @@ namespace Application.Users
 
             // Set maximum allowed RewardPoints and RewardTokens
             questDto.RewardPoints = Math.Min(questDto.RewardPoints, 100);
-            questDto.RewardTokens = Math.Min(questDto.RewardTokens, 15);
+            questDto.RewardTokens = Math.Min(questDto.RewardTokens, 25);
 
             var quest = _mapper.Map<Quest>(questDto);
             await _unitOfWork.QuestRepository.CreateQuestAsync(quest);

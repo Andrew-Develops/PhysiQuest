@@ -1,6 +1,8 @@
 ﻿using Application.Badges.DTO;
 using Application.Common.Exceptions;
 using Application.Common.Interfaces;
+using Application.Quests.DTO;
+using Application.Quests;
 using Application.UserBadges.DTO;
 using Application.UserQuests.DTO;
 using Application.Users.DTO;
@@ -175,13 +177,37 @@ namespace WebAPI.Controllers
             }
         }
 
+
+        [HttpPost("create-quest/{username}")]
+        public async Task<ActionResult<QuestDTO>> CreateUserQuestAsync(string username, [FromBody] CreateAndUpdateQuestDTO questDto)
+        {
+            try
+            {
+                var createdQuest = await _userService.CreateUserQuestAsync(username, questDto);
+                return Ok(createdQuest);
+            }
+            catch (UserNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (InsufficientTokensException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (DuplicateQuestException ex)
+            {
+                return Conflict(ex.Message);
+            }
+        }
+
+
         /// <summary>
         /// Gets the proof image URL for a given user and quest.
         /// </summary>
         /// <param name="username">The username of the user.</param>
         /// <param name="questId">The ID of the quest.</param>
         /// <returns>An ActionResult containing the proof image URL if found, otherwise a NotFoundResult.</returns>
-        [HttpGet("user/{username}/user-quest/{questId}/proof-image-url")]
+        [HttpGet("{username}/user-quest/{questId}/proof-image-url")]
         public async Task<ActionResult<string>> GetProofImageUrlAsync(string username, int questId)
         {
             try
