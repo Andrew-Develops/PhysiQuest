@@ -1,3 +1,5 @@
+*This project was completed within 5 days for a technical evaluation.
+
 # PhysiQuest
 
 PhysiQuest is an application that encourages users to live an active lifestyle by completing challenges and earning points. The app allows users to create and share custom challenges with friends and compete with others on the leaderboard.
