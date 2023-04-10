@@ -175,6 +175,12 @@ namespace WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets the proof image URL for a given user and quest.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <param name="questId">The ID of the quest.</param>
+        /// <returns>An ActionResult containing the proof image URL if found, otherwise a NotFoundResult.</returns>
         [HttpGet("user/{username}/user-quest/{questId}/proof-image-url")]
         public async Task<ActionResult<string>> GetProofImageUrlAsync(string username, int questId)
         {
@@ -199,6 +205,12 @@ namespace WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletes the proof image URL for a given user and quest.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <param name="questId">The ID of the quest.</param>
+        /// <returns>An ActionResult containing the deleted user quest DTO if successful, otherwise a BadRequestResult or NotFoundResult.</returns>
         [HttpDelete("user/{username}/user-quest/{questId}/delete-proof-image-url")]
         public async Task<ActionResult<UserQuestDTO>> DeleteProofImageUrlAsync(string username, int questId)
         {

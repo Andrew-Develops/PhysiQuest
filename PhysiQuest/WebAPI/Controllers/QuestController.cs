@@ -233,10 +233,5 @@ namespace WebAPI.Controllers
             var quests = await _questService.GetQuestsByRewardTokensAsync();
             return Ok(quests);
         }
-
-
-
-
     }
-
 }

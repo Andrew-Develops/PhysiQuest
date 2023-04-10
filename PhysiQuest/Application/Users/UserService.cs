@@ -293,6 +293,13 @@ namespace Application.Users
             return _mapper.Map<QuestDTO>(quest);
         }
 
+        /// <summary>
+        /// Retrieves the URL of the proof image associated with the specified user and quest.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <param name="questId">The ID of the quest.</param>
+        /// <returns>The URL of the proof image.</returns>
+        /// <exception cref="UserQuestNotFoundException">Thrown if the proof image URL is not found.</exception>
         public async Task<string> GetProofImageUrlAsync(string username, int questId)
         {
             var proofImageUrl = await _unitOfWork.UserQuestRepository.GetProofImageUrlAsync(username, questId);
@@ -305,6 +312,13 @@ namespace Application.Users
             return proofImageUrl;
         }
 
+        /// <summary>
+        /// Deletes the URL of the proof image associated with the specified user and quest.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <param name="questId">The ID of the quest.</param>
+        /// <returns>A UserQuestDTO object representing the updated user quest.</returns>
+        /// <exception cref="UserQuestNotFoundException">Thrown if the user quest is not found.</exception>
         public async Task<UserQuestDTO> DeleteProofImageUrlAsync(string username, int questId)
         {
             var userQuest = await _unitOfWork.UserQuestRepository.DeleteProofImageUrlAsync(username, questId);
